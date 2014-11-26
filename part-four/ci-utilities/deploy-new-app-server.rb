@@ -6,7 +6,7 @@ require 'json'
 def extract_subnet_id
   describe_subnets_command = "aws ec2 describe-subnets \
                               --filters Name=tag:aws:cloudformation:logical-id,Values=Subnet \
-                              --region eu-west-1 \
+                              --region us-west-1 \
                               --output json"
   subnets = JSON.parse(`#{describe_subnets_command}`)["Subnets"]
   subnet_id = subnets.first["SubnetId"]
@@ -17,7 +17,7 @@ end
 def extract_security_group_id
   describe_security_groups_command = "aws ec2 describe-security-groups \
                                       --filters Name=tag:aws:cloudformation:logical-id,Values=SecurityGroup \
-                                      --region eu-west-1 \
+                                      --region us-west-1 \
                                       --output json"
   security_groups = JSON.parse(`#{describe_security_groups_command}`)["SecurityGroups"]
   security_group_id = security_groups.first["GroupId"]
@@ -30,7 +30,7 @@ def commence_creation_of_stack(build_number, subnet_id, security_group_id)
   `aws cloudformation create-stack \
   --stack-name app-server-build-#{build_number} \
   --template-body "file://../infrastructure/provisioning/app-server-template.json" \
-  --region eu-west-1 \
+  --region us-west-1 \
   --output text \
   --parameters \
   ParameterKey=SubnetId,ParameterValue=#{subnet_id} \
@@ -42,7 +42,7 @@ end
 def check_that_the_stack_has_been_created(build_number)
   describe_stacks_command = "aws cloudformation describe-stacks \
                              --stack-name app-server-build-#{build_number} \
-                             --region eu-west-1 \
+                             --region us-west-1 \
                              --output json"
   stacks = JSON.parse(`#{describe_stacks_command}`)["Stacks"]
   stack_status = stacks.first["StackStatus"]
