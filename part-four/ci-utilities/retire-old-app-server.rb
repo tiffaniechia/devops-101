@@ -7,7 +7,7 @@ def find_old_stacks
   old_stacks = []
   build_number = ENV['GO_PIPELINE_COUNTER']
   describe_stacks_command = "aws cloudformation describe-stacks \
-                             --region eu-west-1 \
+                             --region us-west-1 \
                              --output json"
   stacks = JSON.parse(`#{describe_stacks_command}`)["Stacks"]
   stacks.each do |stack|
@@ -29,7 +29,7 @@ def commence_deletion_of_stacks(stacks_to_be_deleted)
     puts "Commencing deletion of stack: #{stack_name}"
     `aws cloudformation delete-stack \
      --stack-name #{stack_name} \
-     --region eu-west-1`
+     --region us-west-1`
   end
 end
 
