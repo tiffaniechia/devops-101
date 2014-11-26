@@ -18,7 +18,7 @@
       "Properties" : {
         "VpcId" : { "Ref" : "VPC" },
         "CidrBlock" : "10.0.0.0/24",
-        "AvailabilityZone" : "eu-west-1a",
+        "AvailabilityZone" : "us-west-1a",
         "Tags" : [ {"Key" : "Name", "Value" : "devops-part-four"} ]
       }
     },
@@ -193,7 +193,7 @@
     "EC2InstanceCIMaster" : {
       "Type" : "AWS::EC2::Instance",
       "Properties" : {
-        "ImageId" : "ami-20bd1f57",
+        "ImageId" : "ami-65bab120",
         "InstanceType" : "m1.medium",
         "KeyName" : "main",
         "SubnetId" : { "Ref" : "Subnet" },
@@ -205,7 +205,7 @@
     "EC2InstanceCISlave" : {
       "Type" : "AWS::EC2::Instance",
       "Properties" : {
-        "ImageId" : "ami-20bd1f57",
+        "ImageId" : "ami-65bab120",
         "InstanceType" : "m1.medium",
         "KeyName" : "main",
         "SubnetId" : { "Ref" : "Subnet" },
